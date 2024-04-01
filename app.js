@@ -124,17 +124,30 @@ function kesr(grades) {
         toplam += grade;
     }
     let ortalama = toplam / grades.length;
-    if (ortalama < 80) {
+    if (ortalama < 90) {
         return "You failed";
     } else {
-        return "Passed";
+        return "You passed";
     }
 }
+
+let allGrades = 0;
+let allstudentsCount = 0;
+
+Oxford.forEach((student) => {
+    allGrades += student.grades.reduce((a, b) => a + b, 0);
+    allstudentsCount += student.grades.length;
+});
+
+let averageGrades = allGrades / allstudentsCount;
+console.log("Avarage Grade :", averageGrades);
+
+
 
 Oxford.map((student) => {
     let group = faculties.find((t) => t.id === student.faculty_id);
     let average = ortalama(student.grades);
     let result = kesr(student.grades);
-    console.log(`${student.name} ${student.surname}, ${group.faculty_name} , Result: ${result} , >> Score: ${average}`);
+    console.log(`${student.name} ${student.surname}, ${group.faculty_name} >> Score: ${average} , Result: ${result}`);
 });
 
